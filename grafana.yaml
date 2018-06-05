@@ -120,8 +120,6 @@ objects:
     resources:
       requests:
         storage: 100Mi
-      limits:
-        storage: 100Mi
 # Deploy Grafana behind an oauth proxy
 - apiVersion: extensions/v1beta1
   kind: Deployment
