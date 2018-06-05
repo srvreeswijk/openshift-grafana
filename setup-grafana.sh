@@ -34,7 +34,7 @@ USAGE
    -g: specifiy granularity
    -y: specifies the grafana yaml
    -a: deploy oauth proxy for grafana - otherwise skip it (for preconfigured deployment)
-   -e: deploy node exporter
+   -e: deploy node exporter dashboard 
 
  note:
     - the project must have view permissions for kube-system

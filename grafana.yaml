@@ -82,6 +82,19 @@ objects:
     namespace: "${NAMESPACE}"
   stringData:
     session_secret: "${SESSION_SECRET}="
+# Create an persistent volume claim of 100MiB for storage of dashboards and datasources etc. 
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: grafana-data
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 100Mi
+      limits:
+        storage: 100Mi
 # Deploy Grafana behind an oauth proxy
 - apiVersion: extensions/v1beta1
   kind: Deployment
@@ -156,8 +169,9 @@ objects:
         - name: grafana-tls
           secret:
             secretName: grafana-tls
-        - emptyDir: {}
-          name: grafana-data
+        - name: grafana-data
+          persistentVolumeClaim:
+            claimName: grafana-data
 - apiVersion: v1
   kind: ConfigMap
   metadata:
