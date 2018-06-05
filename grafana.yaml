@@ -34,6 +34,33 @@ objects:
     namespace: "${NAMESPACE}"
     annotations:
       serviceaccounts.openshift.io/oauth-redirectreference.primary: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"grafana"}}'
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    name: docker-repo
+  subsets:
+  - addresses:              
+    - ip: 172.22.165.31
+    ports:                  
+    - port: 1
+      protocol: TCP
+  - addresses:
+    - ip: 172.22.165.32
+    ports:
+    - port: 1
+      protocol: TCP
+  - addresses:
+    - ip: 172.22.165.33
+    ports:
+    - port: 1
+      protocol: TCP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: docker-repo
+  spec:
+    ports:
+    - port: 1 
 - apiVersion: authorization.openshift.io/v1
   kind: ClusterRoleBinding
   metadata:

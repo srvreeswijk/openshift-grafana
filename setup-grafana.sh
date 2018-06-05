@@ -52,11 +52,11 @@ fi
 }
 
 set::oauth() {
-touch -a /etc/origin/master/htpasswd
-htpasswd /etc/origin/master/htpasswd grafana
-sed -ie 's|AllowAllPasswordIdentityProvider|HTPasswdPasswordIdentityProvider\n      file: /etc/origin/master/htpasswd|' /etc/origin/master/master-config.yaml
+sudo touch -a /etc/origin/master/htpasswd
+sudo htpasswd /etc/origin/master/htpasswd grafana
+sudo sed -ie 's|AllowAllPasswordIdentityProvider|HTPasswdPasswordIdentityProvider\n      file: /etc/origin/master/htpasswd|' /etc/origin/master/master-config.yaml
 oc adm policy add-cluster-role-to-user cluster-reader grafana
-systemctl restart atomic-openshift-master-api.service
+sudo systemctl restart origin-master-api.service
 }
 
 # deploy node exporter
